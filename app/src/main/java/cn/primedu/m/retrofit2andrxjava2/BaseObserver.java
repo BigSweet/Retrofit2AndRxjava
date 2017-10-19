@@ -21,6 +21,7 @@ public abstract class BaseObserver<T> implements Observer<BaseData> {
         } else {
             onHandleError(value.getCode(), value.getErr_msg());
         }
+
     }
 
     @Override
