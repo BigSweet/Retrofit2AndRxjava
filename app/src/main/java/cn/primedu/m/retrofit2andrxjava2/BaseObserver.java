@@ -1,9 +1,10 @@
-package cn.primedu.m.retrofit2andrxjava2.retrofit;
+package cn.primedu.m.retrofit2andrxjava2;
 
+import cn.primedu.m.retrofit2andrxjava2.retrofit.BaseData;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BaseObserver<T> implements Observer<BaseData<T>> {
+public abstract class BaseObserver<T> implements Observer<BaseData> {
     //mDisposable.dispose();开光，用来切断连接
     private Disposable mDisposable;
     private final int SUCCESS_CODE = 0;
@@ -13,9 +14,9 @@ public abstract class BaseObserver<T> implements Observer<BaseData<T>> {
     }
 
     @Override
-    public void onNext(BaseData<T> value) {
+    public void onNext(BaseData value) {
         if (value.getCode() == SUCCESS_CODE) {
-            T t = value.getData();
+            T t = (T) value.getData();
             onHandleSuccess(t);
         } else {
             onHandleError(value.getCode(), value.getErr_msg());
